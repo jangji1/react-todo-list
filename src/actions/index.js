@@ -4,27 +4,46 @@
 
 import * as types from './ActionTypes';
 
-export const changeInput = (input) => ({
-  type: types.CHANGE_INPUT,
-  input
-});
+export const changeInput = (input) => {
+  return dispatch => {
+    dispatch({
+      type: types.CHANGE_INPUT,
+      input
+    });
+  };
+};
 
-export const createTodo = (text) => ({
-  types: types.CREATE_TODO,
-  text
-});
+export const createTodo = () => {
+  return dispatch => {
+    dispatch({
+      type: types.CREATE_TODO
+    });
+  };
+};
 
-export const toggleTodo = (id) => ({
-  types: types.TOGGLE_TODO,
-  id
-});
+export const toggleTodo = (id) => {
+  return dispatch => {
+    dispatch({
+      type: types.TOGGLE_TODO,
+      id
+    });
+  };
+}
 
-export const removeTodo = (id) => ({
-  types: types.REMOVE_TODO,
-  id
-});
+export const removeTodo = (id) => {
+  return dispatch => {
+    dispatch({
+      type: types.REMOVE_TODO,
+      id
+    });
+  };
+};
 
-export const selectColor = (color) => ({
-  types: types.SELECT_COLOR,
-  color
-});
+export const selectColor = (color) => {
+  return dispatch => {
+    dispatch({
+      type: types.SELECT_COLOR,
+      color
+    });
+  };
+};

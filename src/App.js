@@ -18,19 +18,24 @@ class App extends Component {
       createTodo,
       input,
       todos,
-      color
+      color,
+      selectColor
     } = this.props;
+    
     return (
       <div>
         <TodoListTemplate 
           palette={
             <Palette
               colors={colors}
+              selected={color}
+              onSelect={selectColor}
             />
           }
           form={
             <Form
               value={input}
+              color={color}
               onChange={changeInput}
               onCreate={createTodo}
             />
@@ -45,17 +50,18 @@ class App extends Component {
 }
 
 // 컨테이너 컴포넌트에서 프레젠테이션 컴포넌트로 전달하는 state
-const mapToState = (state) => ({
-    todos: state.todos
+const mapStateToProps = (state) => ({
+  input: state.input,
+  color: state.color,
+  todos: state.todos
 });
 
 // 컨테이너 컴포넌트에서 프레젠테이션 컴포넌트로 액션을 보내는 함수
-const mapToDispatch = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   changeInput: (e) => dispatch(actions.changeInput(e.target.value)),
-  createTodo: () => {
-    dispatch(actions.createTodo())
-  }
+  createTodo: () => dispatch(actions.createTodo()),
+  selectColor: (color) => dispatch(actions.selectColor(color))
 });
 
 // 리덕스에 연결을 시키고 내보낸다
-export default connect(mapToState, mapToDispatch)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
