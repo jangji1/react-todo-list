@@ -27,12 +27,14 @@ function reducer(state = initialState, action) {
     case types.CREATE_TODO:
       return {
         ...state,
+        input: '',
         todos: [
           ...state.todos,
           {
             id: id++,
             text: state.input,
-            checked: false
+            checked: false,
+            color: state.color
           }
         ]
       };

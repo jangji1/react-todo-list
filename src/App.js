@@ -19,7 +19,10 @@ class App extends Component {
       input,
       todos,
       color,
-      selectColor
+      selectColor,
+      toggleTodo,
+      removeTodo,
+      onKeyPress
     } = this.props;
     
     return (
@@ -38,10 +41,14 @@ class App extends Component {
               color={color}
               onChange={changeInput}
               onCreate={createTodo}
+              onKeyPress={onKeyPress}
             />
-          }>
+          }
+        >
           {<TodoItemList
             todos={todos}
+            onToggle={toggleTodo}
+            onRemove={removeTodo}
           />}
         </TodoListTemplate>
       </div>
@@ -60,7 +67,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeInput: (e) => dispatch(actions.changeInput(e.target.value)),
   createTodo: () => dispatch(actions.createTodo()),
-  selectColor: (color) => dispatch(actions.selectColor(color))
+  onKeyPress: (e) => {
+    if(e.key === 'Enter') dispatch(actions.createTodo())
+  },
+  selectColor: (color) => dispatch(actions.selectColor(color)),
+  toggleTodo: (id) => dispatch(actions.toggleTodo(id)),
+  removeTodo: (id) => dispatch(actions.removeTodo(id))
 });
 
 // 리덕스에 연결을 시키고 내보낸다
