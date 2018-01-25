@@ -1,9 +1,8 @@
 import * as types from '../actions/ActionTypes';
 
-let id = 0;
-
 // 초기 상태를 정의합니다
 const initialState = {
+  increaseId: 0,
   input: '',
   color: '#343a40',
   todos: []
@@ -31,7 +30,7 @@ function reducer(state = initialState, action) {
         todos: [
           ...state.todos,
           {
-            id: id++,
+            id: state.increaseId++,
             text: state.input,
             checked: false,
             color: state.color
